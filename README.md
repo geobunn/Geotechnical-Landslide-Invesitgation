@@ -19,7 +19,7 @@ The primary components of the story map will include:
 
 Geographic data to be used in this report are displayed in the table below. Images showing the landslide subsurface will be original to this work.
 
- Data Title | Original Data Source | Map Format 
+ Data Title | Data Source | Map Format 
  --- | --- | --- 
 Basemap|Created in [Mapbox](https://www.mapbox.com/)|||
 Elevation Raster|[Oregon Lidar Consortium](https://gis.dogami.oregon.gov/maps/lidarviewer/)|Tile Layer
