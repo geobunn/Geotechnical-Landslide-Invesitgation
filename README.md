@@ -19,10 +19,21 @@ The primary components of the story map will include:
 
 Geographic data to be used in this report are displayed in the table below. Images showing the landslide subsurface will be original to this work.
 
- Data Title | Data Source | Map Format 
- --- | --- | --- 
+ Data Title | Data Source | Map Format
+ --- | --- | ---
 Basemap|Created in [Mapbox](https://www.mapbox.com/)|||
 Elevation Raster|[Oregon Lidar Consortium](https://gis.dogami.oregon.gov/maps/lidarviewer/)|Tile Layer
 Slope Raster|[Oregon Lidar Consortium](https://gis.dogami.oregon.gov/maps/lidarviewer/)|Tile Layer
 Landslide Polygons|[Oregon Statewide Landslide Information Database](https://www.oregongeology.org/slido/)|GeoJson
 Cross Section Lines|Original|GeoJson
+
+## Description of Data Sources
+
+### Landslide polygons
+The landslide polygons will have too many features to store online as a GeoJson, and instead they will need to be displayed as a tile layer. Since they will be a tile layer, only one attribute may be displayed (as the feature color). Suggested attributes include average or maximum depth, or volume.
+
+### Cross Section lines
+Cross section lines are a relatively memory light feature class, owing to their simple definition as two points apiece. The lines will be displayed as a GeoJson with two critical attributes: landslide number and (probably) a link to the csv file associated with them.
+
+### Raster Database
+If at all possible, it would be interesting to compute or display depth contours for a landslide, once clicked on. A decision of whether or not this is possible awaits further research.
