@@ -114,9 +114,9 @@ section {
 .viewing {
     color: #1c1c1c;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-    opacity: 0.8;
+    opacity: 1;
     filter: alpha(opacity=80);
-    -moz-opacity: 0.8;
+    -moz-opacity: 1;
 }
 
 .fullscreen {
@@ -268,7 +268,7 @@ video {
 .storymap-legend {
     position: fixed;
     line-height: 16px;
-    width: 100px;
+    width: 150px;
     z-index: 1000;
     right: 20px;
     top: 30px;
