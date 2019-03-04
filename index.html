@@ -1,70 +1,206 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
+<html lang="en">
+<head>
+    <title>Story of Hooskanaden</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--add required stylesheets-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--leaflet css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-.stroke {
-  fill: none;
-  stroke: #000;
-  stroke-width: .5;
-}
+    <!--add favicon for the web page-->
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
-</style>
+    <!--Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/css/storymap.2.5.css">
+
+    <!--add required libraries-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+
+    <!--jquery and Popper-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+    <!--boostrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--leaflet.ajax for asynchronously adding geojson data-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+
+    <!--story map plugin-->
+    <script src="/js/storymap.2.5.js"></script>
+
+    <style>
+    .iframe-container{
+      position: relative;
+      overflow:hidden;
+      padding-top: 56.25%;
+    }
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    </style>
+</head>
 <body>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
-<script src="js/d3.geo.tile.min.js"></script>
-<script>
+<div id="storymap" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-md-8 storymap-map"></div>
+        <div class="col-sm-6 col-md-4 storymap-story">
+            <section data-scene="scene1">
+                <h2>Landslides in Oregon</h2>
+                <div>
+                  <a href="https://twitter.com/intent/tweet?button_hashtag=HooskanadanSlide&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #HooskanadanSlide</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <div class="iframe-container">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/uPFpJTCxwtM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                Bafdfs
+            </section>
+            <section data-scene="scene2">
+                <h2>The Hooskanaden Slide</h2>
+            </section>
+            <section data-scene="scene3">
+                <h2>Surveys for Oregon Department of Transportation</h2>
+            </section>
+            <section data-scene="scene4">
+                <h2>The February 2019 Landslide</h2>
+              <div class="iframe-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/edkt7-dxELY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </section>
+            <section data-scene="scene5">
+                <h2>Impact on Surrounding Areas</h2>
+                <div class = "iframe-container">
+                  <blockquote class="twitter-tweet"><p lang="en" dir="ltr">US 101 remains closed at MP 344, 12 mi north of <a href="https://twitter.com/hashtag/Brookings?src=hash&amp;ref_src=twsrc%5Etfw">#Brookings</a>. This is a chronic trouble spot on US 101, which shifted abruptly yesterday. Nearby Carpenterville Hwy is open to traffic, but is a narrow, winding road. It&#39;s not a viable detour route for any trucks. <a href="https://twitter.com/hashtag/HooskanadanSlide?src=hash&amp;ref_src=twsrc%5Etfw">#HooskanadanSlide</a> <a href="https://t.co/NOZZY26OlZ">pic.twitter.com/NOZZY26OlZ</a></p>&mdash; Oregon DOT (@OregonDOT) <a href="https://twitter.com/OregonDOT/status/1100498016719593473?ref_src=twsrc%5Etfw">February 26, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
 
-var width = 960,
-    height = 500;
+            </section>
+        </div>
 
-var projection = d3.geo.mercator()
-    .center([-96, 38.3])
-    .scale(890);
+    </div>
+</div>
+<script type="text/javascript">
+    var layers = {
+        layer1: {
+            layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
+        },
+        layer2: {
+            layer: L.geoJson.ajax('assets/saa.geojson', {
+                color: 'orange'
+            }),
+            legend: '<i style="background: orange; opacity: 0.5"></i><p><b>legend 2</b></p>'
+        },
+        layer3: {
+            layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png')
+        },
+        layer4: {
+            layer: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
+	            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            })
+        },
+        layer5: {
+            layer: L.geoJson.ajax('assets/outside.geojson', {
+                color: 'black'
+            }),
+        },
+        layer6: {
+            layer: L.geoJson.ajax('assets/inside.geojson', {
+                color: 'black'
+            }),
+            legend: '<i style="background: black; opacity: 0.5"></i><p><b>Possible Extents of February 2019 Landslide</b></p>'
+        },
+        layer7: {
+            layer: L.geoJson.ajax('assets/full.geojson', {
+                color: 'red'
+            }),
+            legend: '<i style="background: red; opacity: 0.5"></i><p><b>Historic Extent of Hooskanaden Slide</b></p>'
+        },
+        layer8: {
+            layer: L.geoJson.ajax('assets/scarps.geojson', {
+                color: 'red'
+            }),
+            legend: '<i style="background: red; opacity: 0.5"></i><p><b>Scarps</b></p>'
+        },
+        layer9: {
+            layer: L.geoJson.ajax('assets/coverage.geojson', {
+                color: 'blue'
+            }),
+            legend: '<i style="background: blue; opacity: 0.5"></i><p><b>Extent of Terrestrial Lidar Surveys</b></p>'
+        },
+        layer10: {
+            layer: L.geoJson.ajax('assets/reroute01.geojson', {
+                color: 'magenta'
+            }),
+            legend: '<i style="background: magenta; opacity: 0.5"></i><p><b>Auto Detour</b></p>'
+        },
+        layer11: {
+            layer: L.geoJson.ajax('assets/reroute02.geojson', {
+                color: 'purple'
+            }),
+            legend: '<i style="background: purple; opacity: 0.5"></i><p><b>Truck Detour</b></p>'
+        },
+        layer12: {
+            layer: L.geoJson.ajax('assets/closure.geojson', {
+                color: 'orange'
+            }),
+            legend: '<i style="background: orange; opacity: 0.5"></i><p><b>Closure</b></p>'
+        },
+        layer13: {
+            layer: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+              attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
+              maxZoom: 13
+            })
+        },
+        layer14: {
+            layer: L.tileLayer('/assets/susc/tiles/{z}/{x}/{y}.png', {
+              maxZoom: 7,
+              tms: true,
+              attribution: 'Generated by QTiles |Data from DOGAMI'
+            })
+        },
+        layer15: {
+            layer: L.tileLayer('/assets/hs/tiles/{z}/{x}/{y}.png', {
+              maxZoom: 17,
+              tms: true,
+              attribution: 'Generated by QTiles | Data from Oregon Lidar Consortium'
+            })
+        }
 
-var path = d3.geo.path()
-    .projection(projection);
-
-var tile = d3.geo.tile()
-    .scale(projection.scale() * 2 * Math.PI)
-    .translate(projection([0, 0]))
-    .zoomDelta((window.devicePixelRatio || 1) - .5);
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-d3.json("/mbostock/raw/4090846/us.json", function(error, topology) {
-  if (error) throw error;
-
-  var tiles = tile();
-
-  var defs = svg.append("defs");
-
-  defs.append("path")
-      .attr("id", "land")
-      .datum(topojson.feature(topology, topology.objects.land))
-      .attr("d", path);
-
-  defs.append("clipPath")
-      .attr("id", "clip")
-    .append("use")
-      .attr("xlink:href", "#land");
-
-  svg.append("g")
-      .attr("clip-path", "url(#clip)")
-    .selectAll("image")
-      .data(tiles)
-    .enter().append("image")
-      .attr("xlink:href", function(d) { return "http://" + ["a", "b", "c", "d"][Math.random() * 4 | 0] + ".tiles.mapbox.com/v3/mapbox.natural-earth-2/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"; })
-      .attr("width", Math.round(tiles.scale))
-      .attr("height", Math.round(tiles.scale))
-      .attr("x", function(d) { return Math.round((d[0] + tiles.translate[0]) * tiles.scale); })
-      .attr("y", function(d) { return Math.round((d[1] + tiles.translate[1]) * tiles.scale); });
-
-  svg.append("use")
-      .attr("xlink:href", "#land")
-      .attr("class", "stroke");
-});
-
+    };
+    var scenes = {
+        scene1: {lat: 44.1234985, lng: -122.8264198, zoom: 7, layers: [layers.layer13, layers.layer14], name: "scene 1"},
+        scene2: {lat: 42.2184522, lng: -124.3775941, zoom: 15, layers: [layers.layer1, layers.layer7], name: "scene 2"},
+        scene3: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.layer1, layers.layer9, layers.layer2], name: "scene 3"},
+        scene4: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.layer5, layers.layer15, layers.layer6, layers.layer8], name: "scene 4"},
+        scene5: {lat: 42.4614849, lng: -124.4283965, zoom: 9, layers: [layers.layer4, layers.layer10, layers.layer11, layers.layer12], name: "scene 5"}
+    };
+    $('#storymap').storymap({
+        scenes: scenes,
+        baselayer: layers.layer3,
+        legend: true,
+        loader: true,
+        flyto: true,
+        credits:  "Build with <i class='material-icons' style='color: red; font-size: 10px;'>landscape</i> from Bo Zhao",
+        scalebar: true,
+        scrolldown: true,
+        progressline: true,
+        navwidget: true,
+        createMap: function () {
+            var map = L.map($(".storymap-map")[0], {zoomControl: false}).setView([44, -120], 7);
+            basemap = this.baselayer.layer.addTo(map);
+            return map;
+        }
+    });
 </script>
+</body>
+</html>
