@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--add required stylesheets-->
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!--leaflet css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
@@ -48,6 +49,11 @@
       height: 100%;
       border: 0;
     }
+    .blockquote-container{
+      position: relative;
+      overflow: hidden;
+      padding-top: 10%;
+    }
     </style>
 </head>
 <body>
@@ -58,7 +64,7 @@
             <section data-scene="scene1">
                 <h2>Landslides in Oregon</h2>
                 <div>
-                  <a href="https://twitter.com/intent/tweet?button_hashtag=HooskanadanSlide&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #HooskanadanSlide</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                  <a href="https://twitter.com/intent/tweet?button_hashtag=HooskanadenSlide&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #HooskanadanSlide</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
                 <div class="iframe-container">
                   <iframe width="560" height="315" src="https://www.youtube.com/embed/uPFpJTCxwtM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -79,7 +85,7 @@
             </section>
             <section data-scene="scene5">
                 <h2>Impact on Surrounding Areas</h2>
-                <div class = "iframe-container">
+                <div class = "blockquote-container">
                   <blockquote class="twitter-tweet"><p lang="en" dir="ltr">US 101 remains closed at MP 344, 12 mi north of <a href="https://twitter.com/hashtag/Brookings?src=hash&amp;ref_src=twsrc%5Etfw">#Brookings</a>. This is a chronic trouble spot on US 101, which shifted abruptly yesterday. Nearby Carpenterville Hwy is open to traffic, but is a narrow, winding road. It&#39;s not a viable detour route for any trucks. <a href="https://twitter.com/hashtag/HooskanadanSlide?src=hash&amp;ref_src=twsrc%5Etfw">#HooskanadanSlide</a> <a href="https://t.co/NOZZY26OlZ">pic.twitter.com/NOZZY26OlZ</a></p>&mdash; Oregon DOT (@OregonDOT) <a href="https://twitter.com/OregonDOT/status/1100498016719593473?ref_src=twsrc%5Etfw">February 26, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </section>
@@ -94,9 +100,12 @@
         },
         layer2: {
             layer: L.geoJson.ajax('assets/saa.geojson', {
-                color: 'orange'
+                color: 'orange',
+                pointToLayer: function (feature, latlng) {
+                  return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-circle fa-2x'})})
+                }
             }),
-            legend: '<i style="background: orange; opacity: 0.5"></i><p><b>legend 2</b></p>'
+            legend: '<i class="fa fa-circle fa-1x"></i><p><b>SAAF Location</b></p>'
         },
         layer3: {
             layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png')
@@ -159,9 +168,12 @@
         },
         layer12: {
             layer: L.geoJson.ajax('assets/closure.geojson', {
-                color: 'orange'
+                color: 'orange',
+                pointToLayer: function (feature, latlng) {
+                  return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-window-close fa-1x'})})
+                }
             }),
-            legend: '<i style="background: orange; opacity: 0.5"></i><p><b>Closure</b></p>'
+            legend: '<i class="fa fa-window-close fa-1x"></i><p><b>Road Closure</b></p>'
         },
         layer13: {
             layer: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
