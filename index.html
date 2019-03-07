@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--add required stylesheets-->
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'/>
+    <!-- Include all font awesome css for facebook icon -->
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!--leaflet css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
@@ -31,6 +33,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!--leaflet.ajax for asynchronously adding geojson data-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.4/proj4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4leaflet/1.0.2/proj4leaflet.min.js"></script>
 
     <!--story map plugin-->
     <script src="/js/storymap.2.5.js"></script>
@@ -54,10 +58,44 @@
       overflow: hidden;
       padding-top: 10%;
     }
+    /* .social {
+      position:fixed;
+      cursor: pointer;
+      font-size:24px;
+      color:darkgray;
+      z-index:1003;
+      top: 4%;
+      left:5px;
+    }
+    .social:hover {
+      color: darkblue;
+      text-decoration: none;
+    } */
     </style>
 </head>
 <body>
+<script>
+mycrs = new L.Proj.CRS('EPSG:2991',
+        '+proj=lcc +lat_1=43 +lat_2=45.5 +lat_0=41.75 +lon_0=-120.5 +x_0=400000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs',
+        {
+            resolutions: [8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 7, 4, 2, 1] // example zoom level resolutions
+        }
+    );
+
+// Set bounds within which the tile maps will be loaded
+southWest = L.latLng(42, -124.5),
+northEast = L.latLng(46, -116.5),
+susc_bounds = L.latLngBounds(southWest, northEast);
+
+southWest = L.latLng(42.212, -124.380),
+northEast = L.latLng(42.2265, -124.3602),
+hs_bounds = L.latLngBounds(southWest, northEast);
+
+</script>
+
+
 <div id="storymap" class="container-fluid">
+
     <div class="row">
         <div class="col-sm-6 col-md-8 storymap-map"></div>
         <div class="col-sm-6 col-md-4 storymap-story">
@@ -95,10 +133,10 @@
 </div>
 <script type="text/javascript">
     var layers = {
-        layer1: {
+        imagery_base: {
             layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
         },
-        layer2: {
+        saa: {
             layer: L.geoJson.ajax('assets/saa.geojson', {
                 color: 'orange',
                 pointToLayer: function (feature, latlng) {
@@ -107,16 +145,16 @@
             }),
             legend: '<i class="fa fa-circle fa-1x"></i><p><b>SAAF Location</b></p>'
         },
-        layer3: {
+        absolute_base: {
             layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png')
         },
-        layer4: {
+        street_base: {
             layer: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
               maxZoom: 19,
 	            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             })
         },
-        layer5: {
+        large_extent: {
             layer: L.geoJson.ajax('assets/outside.geojson', {
                 color: 'black',
                 dashArray: '7',
@@ -124,7 +162,7 @@
                 weight: 2
             }),
         },
-        layer6: {
+        small_extent: {
             layer: L.geoJson.ajax('assets/inside.geojson', {
                 color: 'black',
                 dashArray: '7',
@@ -133,40 +171,40 @@
             }),
             legend: '<i style="background: black; opacity: 0.5"></i><p><b>Possible Extents of February 2019 Landslide</b></p>'
         },
-        layer7: {
+        full_extent: {
             layer: L.geoJson.ajax('assets/full.geojson', {
                 color: 'red'
             }),
             legend: '<i style="background: red; opacity: 0.5"></i><p><b>Historic Extent of Hooskanaden Slide</b></p>'
         },
-        layer8: {
+        scarps: {
             layer: L.geoJson.ajax('assets/scarps.geojson', {
                 color: 'red',
                 weight: 2
             }),
             legend: '<i style="background: red; opacity: 0.5"></i><p><b>Scarps</b></p>'
         },
-        layer9: {
+        tls: {
             layer: L.geoJson.ajax('assets/coverage.geojson', {
                 color: 'blue'
             }),
             legend: '<i style="background: blue; opacity: 0.5"></i><p><b>Extent of Terrestrial Lidar Surveys</b></p>'
         },
-        layer10: {
+        auto_reroute: {
             layer: L.geoJson.ajax('assets/reroute01.geojson', {
                 color: 'magenta',
                 weight: 5
             }),
             legend: '<i style="background: magenta; opacity: 0.5"></i><p><b>Auto Detour</b></p>'
         },
-        layer11: {
+        truck_reroute: {
             layer: L.geoJson.ajax('assets/reroute02.geojson', {
                 color: 'purple',
                 weight: 5
             }),
             legend: '<i style="background: purple; opacity: 0.5"></i><p><b>Truck Detour</b></p>'
         },
-        layer12: {
+        closure: {
             layer: L.geoJson.ajax('assets/closure.geojson', {
                 color: 'orange',
                 pointToLayer: function (feature, latlng) {
@@ -175,38 +213,43 @@
             }),
             legend: '<i class="fa fa-window-close fa-1x"></i><p><b>Road Closure</b></p>'
         },
-        layer13: {
+        terrain_base: {
             layer: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
               attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
               maxZoom: 13
             })
         },
-        layer14: {
-            layer: L.tileLayer('/assets/susc/tiles/{z}/{x}/{y}.png', {
+        susc: {
+            layer: L.tileLayer('http://web.engr.oregonstate.edu/~bunnmi/assets/susc/tiles/{z}/{x}/{y}.png', {
+              crs: mycrs,
               maxZoom: 7,
+              minZoom: 7,
               tms: true,
+              bounds: susc_bounds,
               attribution: 'Generated by QTiles |Data from DOGAMI'
             })
         },
-        layer15: {
+        hs: {
             layer: L.tileLayer('/assets/hs/tiles/{z}/{x}/{y}.png', {
               maxZoom: 17,
+              minZoom: 17,
               tms: true,
+              bounds: hs_bounds,
               attribution: 'Generated by QTiles | Data from Oregon Lidar Consortium'
             })
         }
 
     };
     var scenes = {
-        scene1: {lat: 44.1234985, lng: -122.8264198, zoom: 7, layers: [layers.layer13, layers.layer14], name: "scene 1"},
-        scene2: {lat: 42.2184522, lng: -124.3775941, zoom: 15, layers: [layers.layer1, layers.layer7], name: "scene 2"},
-        scene3: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.layer1, layers.layer9, layers.layer2], name: "scene 3"},
-        scene4: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.layer5, layers.layer15, layers.layer6, layers.layer8], name: "scene 4"},
-        scene5: {lat: 42.4614849, lng: -124.4283965, zoom: 9, layers: [layers.layer4, layers.layer10, layers.layer11, layers.layer12], name: "scene 5"}
+        scene1: {lat: 44.1234985, lng: -122.8264198, zoom: 7, layers: [layers.terrain_base,layers.susc], name: "scene 1"},
+        scene2: {lat: 42.2184522, lng: -124.3775941, zoom: 15, layers: [layers.imagery_base, layers.full_extent], name: "scene 2"},
+        scene3: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.imagery_base, layers.tls, layers.saa], name: "scene 3"},
+        scene4: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.imagery_base,layers.large_extent, layers.hs, layers.small_extent, layers.scarps], name: "scene 4"},
+        scene5: {lat: 42.4614849, lng: -124.4283965, zoom: 9, layers: [layers.street_base, layers.auto_reroute, layers.truck_reroute, layers.closure], name: "scene 5"}
     };
     $('#storymap').storymap({
         scenes: scenes,
-        baselayer: layers.layer3,
+        baselayer: layers.absolute_base,
         legend: true,
         loader: true,
         flyto: true,
