@@ -54,9 +54,11 @@
     .blockquote-container{
       position: relative;
       overflow: hidden;
-      padding-top: 10%;
+      padding-top: 0%;
     }
-
+    .end-background-img {
+      background-size: cover;
+    }
     </style>
 </head>
 <body>
@@ -82,65 +84,6 @@ hs_bounds = L.latLngBounds(southWest, northEast);
 
 </script>
 
-<nav class="navbar navbar-inverse navbar-fixed-top navbar-toggleable-md" role="navigation">
-	<div class="container-fluid" >
-		<a class="navbar-brand" href="#">
-			<img src="img/favicon.ico" class="align-top" height="20px" align="left"> &nbsp;
-		</a>
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Stand with #StandingRock</a>
-		</div>
-
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="javascript:window.scrollBy(0,$('section[data-scene=overview]').offset().top-$(window).scrollTop()-40);">Home</a>
-				</li>
-				<li>
-					<a href="javascript:window.scrollBy(0,$('section[data-scene=checkin]').offset().top-$(window).scrollTop()-40);">Info</a>
-				</li>
-				<li>
-					<a href="javascript:window.scrollBy(0,$('section[data-scene=map_intro]').offset().top-$(window).scrollTop()-40);">StandingRock</a>
-				</li>
-				<li>
-					<a href="javascript:window.scrollBy(0,$('section[data-scene=map_pipeline]').offset().top-$(window).scrollTop()-40);">Pipeline</a>
-				</li>
-				<li>
-					<a href="javascript:window.scrollBy(0,$('section[data-scene=map_camp]').offset().top-$(window).scrollTop()-40);">Camps</a>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Check-in<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex]').offset().top-$(window).scrollTop()-40);">Spoofed Check-ins</a>
-						</li>
-						<li>
-							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex_case1]').offset().top-$(window).scrollTop()-40);">Why Spoofing?</a>
-						</li>
-						<li>
-							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex_case2]').offset().top-$(window).scrollTop()-40);">Spatial and Semantic Explore</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a class="fa fa-facebook-square social" href="https://facebook.com/sharer.php?u=https://winkyt.github.io/standwithstandingrock" target="_blank"></a>
-				</li>
-				<li>
-					<a class="fa fa-twitter-square social" href="https://twitter.com/home?status=Location%20Spoofing%20at%20StandingRock%0Ahttps://winkyt.github.io/standwithstandingrock" target="_blank"></a>
-				</li>
-				<li>
-					<a class="fa fa-github-square social2"  href="https://github.com/winkyt/standwithstandingrock" target="_blank"></a>
-				</li>
-				<li>
-					<!--<a class="fa fa-info-circle social"  href="about.html" target="_blank"></a>-->
-					<!--<a class="fa fa-info-circle social" data-toggle="modal" data-target="#info-modal" href="about.html"></a>-->
-					<a href="about.html" target="_blank" style="color: white;"><b>About</b></a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</nav>
-
 <div id="storymap" class="container-fluid">
 
     <div class="row">
@@ -148,35 +91,68 @@ hs_bounds = L.latLngBounds(southWest, northEast);
         <div class="col-sm-6 col-md-4 storymap-story">
             <section data-scene="scene1">
                 <h2>Landslides in Oregon</h2>
-                <div class="fb-share-button" data-href="http://web.engr.oregonstate.edu/~bunnmi/" data-layout="button" data-size="small" data-mobile-iframe="true">
-                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fweb.engr.oregonstate.edu%2F%7Ebunnmi%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
-                </div>
 
-                <div>
-                  <a href="https://twitter.com/intent/tweet?button_hashtag=HooskanadenSlide&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #HooskanadanSlide</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
+                  <p>The geology and climate of western Oregon are responsible for creating significant landslide hazards, particularly in the Oregon Coast Range.
+                     This risk can be explained in large part by the correspondence of high susceptibility (e.g., weak, weathered soils or rock) and high precipitation (e.g., quantity, rate, duration).
+                     The Oregon Department of Geology and Mineral Industries (<a href = "https://www.oregongeology.org/pubs/ofr/p-O-16-02.htm">Burns et al. 2016</a>) recently published a new, statewide landslide susceptibility map (On right - red means greater susceptibility).
+                      When these high to very high susceptibility conditions throughout the Coast Range and Cascades are exposed with substantial volumes of rainfall, the risk of landslides becomes large and results in the frequent occurrence of damaging slides.
+                      Landslides often impact highway infrastructure and result in closures for removal of debris and or repair.
+
                 <div class="iframe-container">
                   <iframe width="560" height="315" src="https://www.youtube.com/embed/uPFpJTCxwtM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                Bafdfs
+                <div class="fb-share-button" data-href="http://web.engr.oregonstate.edu/~bunnmi/" data-layout="button" data-size="small" data-mobile-iframe="true">
+                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fweb.engr.oregonstate.edu%2F%7Ebunnmi%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                </div>
+                or
+                <div>
+                  <a href="https://twitter.com/intent/tweet?button_hashtag=HooskanadenSlide&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #HooskanadanSlide</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
             </section>
             <section data-scene="scene2">
                 <h2>The Hooskanaden Slide</h2>
+                <p> The Hooskanaden Slide is a large, complex landslide located on the southern Oregon Coast.
+                  The slide has likely been active for thousands of years, but it has only been well known since the construction of U.S. Route 101 around 1960.
+                  Since the highway's construction, the landslide has moved consistently during the winter months, forcing the Oregon Department of Transporation to repave the overlying highways each year- The fresh pavement is visible on the imagery to the right. 
             </section>
             <section data-scene="scene3">
                 <h2>Surveys for Oregon Department of Transportation</h2>
+                <p>Starting in 2016, the Oregon Department of Transportation, working with researchers at Oregon State University, began <a href="https://www.oregon.gov/ODOT/Programs/ResearchDocuments/SPR807WP.pdf">SPR 807</a> to monitor several active landslides on U.S. Route 101 along the Oregon Coast.
+				<br><br>As one of the included landslides, Hooskanaden has been the subject of terrestrial lidar surveys each spring and fall. For each survey, crews document the landslides at three major locations: the highway, the coastal bluff, and a nearby stream culvert.
+				<br><br>Movements have been so severe at Hooskanaden that work for SPR 807 spurred an additional research project, <a href="https://www.oregon.gov/ODOT/Programs/ResearchDocuments/SPR808WP.pdf">SPR 808</a> that supported subsurface monitoring of the landslide. Monitoring was performed using a state-of-the art <a href="http://measurandgeotechnical.com/?/products/saaf">SAAF</a> inclinometer system that could record subsurface movements at a high frequency and transmit data wirelessly from the site. This monitoring was short-lived, though, as the SAAF was destroyed by extreme landslide displacements following only three months of service.</p>
+
             </section>
             <section data-scene="scene4">
                 <h2>The February 2019 Landslide</h2>
+                <p>On February 25, 2019, following heavy precipiation over preceding days, the Hooskanaden Slide began to move rapidly.
+                  Movements have continued to date, making a highway repair very difficult. The video below shows the extent of damage nearly one week after the slide reactivated.
+
               <div class="iframe-container">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/edkt7-dxELY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>
             </section>
             <section data-scene="scene5">
                 <h2>Impact on Surrounding Areas</h2>
+                Highway closures have severely impacted the surrounding region. Traffic has needed to be detoured around the slide.
+                The normally 35-minute drive between the closely-tied communities of Brookings and Gold Beach now takes 1-hour in a standard automobile, and even worse 6-hours for semi-trucks.
+                These delays have affected the supply of items ranging from gasoline to groceries in either community.</p>
                 <div class = "blockquote-container">
                   <blockquote class="twitter-tweet"><p lang="en" dir="ltr">US 101 remains closed at MP 344, 12 mi north of <a href="https://twitter.com/hashtag/Brookings?src=hash&amp;ref_src=twsrc%5Etfw">#Brookings</a>. This is a chronic trouble spot on US 101, which shifted abruptly yesterday. Nearby Carpenterville Hwy is open to traffic, but is a narrow, winding road. It&#39;s not a viable detour route for any trucks. <a href="https://twitter.com/hashtag/HooskanadanSlide?src=hash&amp;ref_src=twsrc%5Etfw">#HooskanadanSlide</a> <a href="https://t.co/NOZZY26OlZ">pic.twitter.com/NOZZY26OlZ</a></p>&mdash; Oregon DOT (@OregonDOT) <a href="https://twitter.com/OregonDOT/status/1100498016719593473?ref_src=twsrc%5Etfw">February 26, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
+                <p> It is expected that construction crews will have the highway reopened by mid-March, but even then it will be a single-lane gravel road with significant delays during commute hours.</p>
+            </section>
+            <section data-scene="scene6">
+                <video class="background-fullscreen-setting" playsinline autoplay muted loop>
+                  <source src="img/repair.mp4" type="video/mp4">
+                </video>
+                <div class= "end-background-img background-fullscreen-setting text-center" >
+                  <br/>
+                  <h3 style="color: black">Storymap by Michael Bunn</h3>
+                  <h4 style="color: black"><small><a style="color: black" href="https://github.com/geobunn">"geobunn" on GitHub</a></small></h4>
+                  <h4><small style="color: black">Template By: Bo Zhao<br><a style="color: black" href="https://github.com/jakobzhao">https://github.com/jakobzhao</a></small></h4>
+
+                </div>
+
             </section>
         </div>
 
@@ -297,7 +273,8 @@ hs_bounds = L.latLngBounds(southWest, northEast);
         scene2: {lat: 42.2184522, lng: -124.3775941, zoom: 15, layers: [layers.imagery_base, layers.full_extent], name: "scene 2"},
         scene3: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.imagery_base, layers.tls, layers.saa], name: "scene 3"},
         scene4: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.imagery_base,layers.large_extent, layers.hs, layers.small_extent, layers.scarps], name: "scene 4"},
-        scene5: {lat: 42.4614849, lng: -124.4283965, zoom: 9, layers: [layers.street_base, layers.auto_reroute, layers.truck_reroute, layers.closure], name: "scene 5"}
+        scene5: {lat: 42.4614849, lng: -124.4283965, zoom: 9, layers: [layers.street_base, layers.auto_reroute, layers.truck_reroute, layers.closure], name: "scene 5"},
+        scene6: {lat: 42.4614849, lng: -124.4283965, zoom: 9, position: 'fullpage', name: 'scene 6'}
     };
     $('#storymap').storymap({
         scenes: scenes,
@@ -305,7 +282,7 @@ hs_bounds = L.latLngBounds(southWest, northEast);
         legend: true,
         loader: true,
         flyto: true,
-        credits:  "Build with <i class='material-icons' style='color: red; font-size: 10px;'>landscape</i> from Bo Zhao",
+        credits:  "Built by Michael Bunn",
         scalebar: true,
         scrolldown: false,
         progressline: true,
