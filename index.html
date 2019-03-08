@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--add required stylesheets-->
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'/>
-    <!-- Include all font awesome css for facebook icon -->
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!--leaflet css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
@@ -58,22 +56,13 @@
       overflow: hidden;
       padding-top: 10%;
     }
-    /* .social {
-      position:fixed;
-      cursor: pointer;
-      font-size:24px;
-      color:darkgray;
-      z-index:1003;
-      top: 4%;
-      left:5px;
-    }
-    .social:hover {
-      color: darkblue;
-      text-decoration: none;
-    } */
+
     </style>
 </head>
 <body>
+
+<div id="fb-root"></div>
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
 <script>
 mycrs = new L.Proj.CRS('EPSG:2991',
         '+proj=lcc +lat_1=43 +lat_2=45.5 +lat_0=41.75 +lon_0=-120.5 +x_0=400000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs',
@@ -93,6 +82,64 @@ hs_bounds = L.latLngBounds(southWest, northEast);
 
 </script>
 
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-toggleable-md" role="navigation">
+	<div class="container-fluid" >
+		<a class="navbar-brand" href="#">
+			<img src="img/favicon.ico" class="align-top" height="20px" align="left"> &nbsp;
+		</a>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Stand with #StandingRock</a>
+		</div>
+
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=overview]').offset().top-$(window).scrollTop()-40);">Home</a>
+				</li>
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=checkin]').offset().top-$(window).scrollTop()-40);">Info</a>
+				</li>
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=map_intro]').offset().top-$(window).scrollTop()-40);">StandingRock</a>
+				</li>
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=map_pipeline]').offset().top-$(window).scrollTop()-40);">Pipeline</a>
+				</li>
+				<li>
+					<a href="javascript:window.scrollBy(0,$('section[data-scene=map_camp]').offset().top-$(window).scrollTop()-40);">Camps</a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Check-in<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex]').offset().top-$(window).scrollTop()-40);">Spoofed Check-ins</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex_case1]').offset().top-$(window).scrollTop()-40);">Why Spoofing?</a>
+						</li>
+						<li>
+							<a href="javascript:window.scrollBy(0,$('section[data-scene=map_hex_case2]').offset().top-$(window).scrollTop()-40);">Spatial and Semantic Explore</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a class="fa fa-facebook-square social" href="https://facebook.com/sharer.php?u=https://winkyt.github.io/standwithstandingrock" target="_blank"></a>
+				</li>
+				<li>
+					<a class="fa fa-twitter-square social" href="https://twitter.com/home?status=Location%20Spoofing%20at%20StandingRock%0Ahttps://winkyt.github.io/standwithstandingrock" target="_blank"></a>
+				</li>
+				<li>
+					<a class="fa fa-github-square social2"  href="https://github.com/winkyt/standwithstandingrock" target="_blank"></a>
+				</li>
+				<li>
+					<!--<a class="fa fa-info-circle social"  href="about.html" target="_blank"></a>-->
+					<!--<a class="fa fa-info-circle social" data-toggle="modal" data-target="#info-modal" href="about.html"></a>-->
+					<a href="about.html" target="_blank" style="color: white;"><b>About</b></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
 
 <div id="storymap" class="container-fluid">
 
@@ -101,6 +148,10 @@ hs_bounds = L.latLngBounds(southWest, northEast);
         <div class="col-sm-6 col-md-4 storymap-story">
             <section data-scene="scene1">
                 <h2>Landslides in Oregon</h2>
+                <div class="fb-share-button" data-href="http://web.engr.oregonstate.edu/~bunnmi/" data-layout="button" data-size="small" data-mobile-iframe="true">
+                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fweb.engr.oregonstate.edu%2F%7Ebunnmi%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                </div>
+
                 <div>
                   <a href="https://twitter.com/intent/tweet?button_hashtag=HooskanadenSlide&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #HooskanadanSlide</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
@@ -220,6 +271,7 @@ hs_bounds = L.latLngBounds(southWest, northEast);
             })
         },
         susc: {
+            // layer: L.tileLayer('http://web.engr.oregonstate.edu/~bunnmi/assets/susc/tiles/{z}/{x}/{y}.png', {
             layer: L.tileLayer('http://web.engr.oregonstate.edu/~bunnmi/assets/susc/tiles/{z}/{x}/{y}.png', {
               crs: mycrs,
               maxZoom: 7,
