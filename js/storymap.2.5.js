@@ -32,7 +32,7 @@
 
         var defaults = {
             selector: '[data-scene]',
-            triggerpos: '25%',
+            triggerpos: '30%',
             navbar: false,
             navwidget: false,
             legend: true,

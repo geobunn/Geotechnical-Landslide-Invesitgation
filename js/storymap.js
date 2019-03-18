@@ -1,4 +1,4 @@
-// Modified by Bo Zhao, zhao2@oregonstate.edu
+/ Modified by Bo Zhao, zhao2@oregonstate.edu
 // Originally obtained from http://atlefren.github.io/storymap/
 // Updated on 5/14/2017 | version 2.22 | MIT License
 
