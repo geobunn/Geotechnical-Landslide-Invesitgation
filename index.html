@@ -64,6 +64,14 @@
       width: 100%;
       height: auto;
     }
+    .potree-container {
+      min-width: 700,
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      border: 0;
     }
     img {
       width = 100%;
@@ -240,6 +248,17 @@ var hs = L.tileLayer('https://research.engr.oregonstate.edu/geomatics/projects/O
     attribution: '<div id="credits" style="display:inline">UAS Imagery acquired by Oregon State University in collaboration with ODOT | Basemap &copy; ArcGIS</div>',
 });
 
+var lidar = L.marker([42.219290, -124.371018],{
+        color: 'orange',
+        icon: L.divIcon({className: 'fa fa-beer fa-5x'}),
+        zIndex: 100,
+    });
+lidar.bindPopup('<div class="potree-container"><iframe width="1000" height="563" src="http://research.engr.oregonstate.edu/geomatics/projects/OregonCoast/Hooskanaden/Feb2019/lidar/" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>',{
+  minWidth: 700,
+  maxWidth: "auto",
+});
+var lidar_legend = '<i class="fa fa-circle fa-1x"></i><p><b>Open Lidar</b></p>';
+
 ///////////////////////////////////////////////////////////////////////////////
 // IMPACT TO SURROUNDINGS (SCENE 5)
 var auto_reroute = L.geoJson.ajax('assets/reroute01.geojson', {
@@ -322,6 +341,7 @@ var truck_reroute_legend = '<i style="background: purple; opacity: 0.5"></i><p><
         },
         hs: {layer:hs},
         ortho: {layer:ortho},
+        lidar: {layer:lidar,legend:lidar_legend},
 
 
     };
@@ -333,7 +353,7 @@ var truck_reroute_legend = '<i style="background: purple; opacity: 0.5"></i><p><
         scene1: {lat: 44.1234985, lng: -122.8264198, zoom: 7, layers: [layers.terrain_base,layers.susc], name: "Landslides in Oregon"},
         scene2: {lat: 42.2184522, lng: -124.3775941, zoom: 15, layers: [layers.imagery_base, layers.full_extent], name: "The Hooskanaden Slide"},
         scene3: {lat: 42.2184522, lng: -124.3775941, zoom: 16, layers: [layers.imagery_base, layers.tls, layers.saa], name: "ODOT surveys"},
-        scene4: {lat: 42.220434, lng:   -124.372629, zoom: 18, layers: [layers.imagery_base,layers.ortho], name: "Feb 2019 Event"},
+        scene4: {lat: 42.220434, lng:   -124.372629, zoom: 18, layers: [layers.imagery_base,layers.ortho,layers.lidar], name: "Feb 2019 Event"},
         scene5: {lat: 42.4614849, lng: -124.4283965, zoom: 9, layers: [layers.street_base, layers.auto_reroute, layers.truck_reroute, layers.closure], name: "Impact to Surroundings"},
         scene6: {lat: 42.4614849, lng: -124.4283965, zoom: 9, position: 'fullpage', name: 'Repairs'}
     };
