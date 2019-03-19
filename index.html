@@ -60,17 +60,15 @@
     .end-background-img {
       background-size: cover;
     }
-    .img-container{
-      position: absolute;
-      top: 0;
-      left: 0;
+    .responsive {
       width: 100%;
-      height: 100%;
-      border: 0;
+      height: auto;
+    }
     }
     img {
       width = 100%;
       height: auto;
+      display: block;
     }
     </style>
 </head>
@@ -122,7 +120,7 @@ hs_bounds = L.latLngBounds(southWest, northEast);
                 <div class="fullscreen text-center">
 
                     <h1 class="display-4 d-flex justify-content-center">The Hooskanaden Landslide</h1>
-                    <h3 style="color: white">Oregon's <strong>Baddest</strong> Slide</h3>
+                    <h3 style="color: white">Oregon's <strong>Meanest</strong> Slide</h3>
                 </div>
             </section>
             <section data-scene="scene1">
@@ -143,9 +141,9 @@ hs_bounds = L.latLngBounds(southWest, northEast);
                 <p> The Hooskanaden Slide is a large, complex landslide located on the southern Oregon Coast.
                   The slide has likely been active for thousands of years, but it has only been well known since the construction of U.S. Route 101 around 1960.
                   Since the highway's construction, the landslide has moved consistently during the winter months, forcing the Oregon Department of Transporation to repave the overlying highways each year- The fresh pavement is visible on the imagery to the right.</p>
-                  <div class="img-container">
-                    <img src="img/SAA.jpg" class="img-responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide">
-                  </div>
+
+                <img src="img/road_top.JPG" class="responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide" width="600" height="400">
+                <b>View of the Hooskanaden Slide from the slopes to its immediate north.</b>
             </section>
             <section data-scene="scene3">
                 <h2>Surveys for Oregon Department of Transportation</h2>
@@ -156,7 +154,7 @@ hs_bounds = L.latLngBounds(southWest, northEast);
             </section>
             <section data-scene="scene4">
                 <h2>The February 2019 Landslide</h2>
-                <p>On February 25, 2019, following heavy precipiation over preceding days, the Hooskanaden Slide began to move rapidly.
+                <p>On February 25, 2019, following heavy precipitation over preceding days, the Hooskanaden Slide began to move rapidly.
                   Movements have continued to date, making a highway repair very difficult. The video below shows the extent of damage nearly one week after the slide reactivated.
 
               <div class="iframe-container">
@@ -198,12 +196,29 @@ var saa = L.geoJson.ajax('assets/saa.geojson', {
         return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-circle fa-2x'})})
         },
         onEachFeature: function (feature, layer) {
-          layer.bindPopup("INSERT SAA Picture Here");
+          layer.bindPopup('<img src="img/SAA.jpg" class="responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide" width="600" height="400"><b>Picture of the SAAF installation, including the SAAF (left) and the data logging equipment (right)</b>',{
+            minWidth: 400,
+          });
         },
     });
-
 var saa_legend = '<i class="fa fa-circle fa-1x"></i><p><b>SAAF Location</b></p>';
 
+var img01 = '<img src="img/road.jpg" class="responsive" alt="responsive image" alt-text="View of road at Hooskanaden" width="600" height="400"><b>View of landslide-disturbances along U.S. Route 101.</b>';
+var img02 = '<img src="img/beach.JPG" class="responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide" width="600" height="400"><b>Laser scanner operating on the beach below the Hooskanaden Slide.</b>';
+var img03 = '<img src="img/culvert.JPG" class="responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide" width="600" height="400"><b>View of damaged culverts in the Hooskanaden Creek embankment.</b>';
+var tls = L.geoJson.ajax('assets/coverage.geojson', {
+        color: 'blue',
+        onEachFeature: function (feature, layer) {
+          if (feature.properties.Id == 1) {
+            layer.bindPopup(img01, {minWidth: 400});
+          } else if (feature.properties.Id == 2) {
+            layer.bindPopup(img02, {minWidth: 400});
+          } else {
+            layer.bindPopup(img03, {minWidth: 400});
+          }
+        },
+    });
+var tls_legend = '<i style="background: blue; opacity: 0.5"></i><p><b>Extent of Terrestrial Lidar Surveys</b></p>';
 
 ////////////////////////////////////////////////////////////////////////////////
 // FEB 2019 EVENT (SCENE 4)
@@ -266,6 +281,7 @@ var truck_reroute_legend = '<i style="background: purple; opacity: 0.5"></i><p><
             layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
         },
         saa: {layer: saa, legend: saa_legend},
+        tls: {layer: tls, legend: tls_legend},
         absolute_base: {
             layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png')
         },
@@ -281,12 +297,7 @@ var truck_reroute_legend = '<i style="background: purple; opacity: 0.5"></i><p><
             }),
             legend: '<i style="background: red; opacity: 0.5"></i><p><b>Historic Extent of Hooskanaden Slide</b></p>'
         },
-        tls: {
-            layer: L.geoJson.ajax('assets/coverage.geojson', {
-                color: 'blue'
-            }),
-            legend: '<i style="background: blue; opacity: 0.5"></i><p><b>Extent of Terrestrial Lidar Surveys</b></p>'
-        },
+
         auto_reroute: {layer: auto_reroute, legend: auto_reroute_legend},
         truck_reroute: {layer: truck_reroute, legend: truck_reroute_legend},
         closure: {layer: closure, legend: closure_legend},
