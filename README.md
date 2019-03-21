@@ -3,7 +3,9 @@
 
 This webmap provides a brief history of the Hooskanaden Landslide, one of Oregon's most damaging landslides.
 
-**You can view the map [here](https://geobunn.github.io/Geotechnical-Landslide-Invesitgation/)!**
+**You can view the map [here](https://geobunn.github.io/Geotechnical-Landslide-Invesitgation/) or [here](http://web.engr.oregonstate.edu/~bunnmi/)!**
+
+The first link is hosted on GitHub, but has difficulty loading the Potree window. If you would like to see the Potree of laser scans, please use the second link.
 
 ## Project Components
 
