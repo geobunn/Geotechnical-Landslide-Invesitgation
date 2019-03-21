@@ -18,7 +18,7 @@
     <!--Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="http://web.engr.oregonstate.edu/~bunnmi/css/storymap.2.5.css">
+    <link rel="stylesheet" type="text/css" href="https://geobunn.github.io/Geotechnical-Landslide-Invesitgation/css/storymap.2.5.css">
 
     <!--add required libraries-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
@@ -35,7 +35,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4leaflet/1.0.2/proj4leaflet.min.js"></script>
 
     <!--story map plugin-->
-    <script src="http://web.engr.oregonstate.edu/~bunnmi/js/storymap.2.5.js"></script>
+    <script src="https://geobunn.github.io/Geotechnical-Landslide-Invesitgation/js/storymap.2.5.js"></script>
     <!-- <script src="js/layer_spec.js"></script> -->
 
     <style>
@@ -124,7 +124,7 @@ hs_bounds = L.latLngBounds(southWest, northEast);
     <div class="row">
         <div class="col-sm-6 col-md-8 storymap-map"></div>
         <div class="col-sm-6 col-md-4 storymap-story">
-            <section data-scene="scene0" data-background="http://web.engr.oregonstate.edu/~bunnmi/img/LR_Scan.jpg">
+            <section data-scene="scene0" data-background="https://geobunn.github.io/Geotechnical-Landslide-Invesitgation/img/LR_Scan.jpg">
                 <div class="fullscreen text-center">
 
                     <h1 class="display-4 d-flex justify-content-center">The Hooskanaden Landslide</h1>
@@ -211,10 +211,10 @@ var saa = L.geoJson.ajax('assets/saa.geojson', {
     });
 var saa_legend = '<i class="fa fa-circle fa-1x"></i><p><b>SAAF Location</b></p>';
 
-var img01 = '<img src="http://web.engr.oregonstate.edu/~bunnmi/img/road.jpg" class="responsive" alt="responsive image" alt-text="View of road at Hooskanaden" width="600" height="400"><b>View of landslide-disturbances along U.S. Route 101.</b>';
-var img02 = '<img src="http://web.engr.oregonstate.edu/~bunnmi/img/beach.JPG" class="responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide" width="600" height="400"><b>Laser scanner operating on the beach below the Hooskanaden Slide.</b>';
-var img03 = '<img src="http://web.engr.oregonstate.edu/~bunnmi/img/culvert.JPG" class="responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide" width="600" height="400"><b>View of damaged culverts in the Hooskanaden Creek embankment.</b>';
-var tls = L.geoJson.ajax('http://web.engr.oregonstate.edu/~bunnmi/assets/coverage2.geojson', {
+var img01 = '<img src="img/road.jpg" class="responsive" alt="responsive image" alt-text="View of road at Hooskanaden" width="600" height="400"><b>View of landslide-disturbances along U.S. Route 101.</b>';
+var img02 = '<img src="img/beach.JPG" class="responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide" width="600" height="400"><b>Laser scanner operating on the beach below the Hooskanaden Slide.</b>';
+var img03 = '<img src="img/culvert.JPG" class="responsive" alt="responsive image" alt-text="Overview of Hooskanaden Slide" width="600" height="400"><b>View of damaged culverts in the Hooskanaden Creek embankment.</b>';
+var tls = L.geoJson.ajax('assets/coverage2.geojson', {
         color: 'blue',
         onEachFeature: function (feature, layer) {
           if (feature.properties.TRIG == 1) {
@@ -329,7 +329,7 @@ var truck_reroute_legend = '<i style="background: purple; opacity: 0.5"></i><p><
         },
         susc: {
             // layer: L.tileLayer('http://web.engr.oregonstate.edu/~bunnmi/assets/susc/tiles/{z}/{x}/{y}.png', {
-            layer: L.tileLayer('http://web.engr.oregonstate.edu/~bunnmi/assets/susc/tiles/{z}/{x}/{y}.png', {
+            layer: L.tileLayer('assets/susc/tiles/{z}/{x}/{y}.png', {
               crs: mycrs,
               maxZoom: 7,
               minZoom: 7,
